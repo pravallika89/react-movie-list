@@ -4,7 +4,7 @@ const MovieFormComponent=({addNewMovie})=>{
   //Initialize variables and state hooks
   const [movieTitle,setMovieTitle]=useState('');
   const [movieImbdLink,setMovieImbdLink]=useState('');
-  const [movieYear,setMovieYear]=useState( 2000);
+  const [movieYear,setMovieYear]=useState('');
   const [movieGenre,setMovieGenre]=useState('');
   const [movieImgLink,setMovieImgLink]=useState('');
 
@@ -27,7 +27,7 @@ const MovieFormComponent=({addNewMovie})=>{
   const clearForm = () => {
     setMovieTitle('');
     setMovieImbdLink('');
-    setMovieYear('2000');
+    setMovieYear('');
     setMovieGenre('');
     setMovieImgLink('');
   };
