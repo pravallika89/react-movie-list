@@ -17,16 +17,18 @@ const MovieListComponent = ({movies}) => {
              <div className='col-6 offset-3'>
                  <h1>Movie List</h1>
              </div>
+          
              <table className='table table-striped table-dark'>
                  <tbody>
                  {
-                   movies.map((movie, index) => {
+                   movies.map((movie) => {
                   return (
                             <tr key={movie.id} >
-                                <td><h1 className='align-self-center'><a href={movie.imdbLink} target='_blank' rel='noreferrer'>{movie.title}</a></h1></td>
+                                <td><h2 className='align-self-center'><a href={movie.imdbLink} target='_blank' rel='noreferrer'>{movie.title}</a></h2></td>
                                 <td><img  src={movie.image} alt='img' height='100px' width='100px'/></td>
                                 <td><button className='btn btn-primary justify-content-center' onClick={ () => movieDetails(movie.id)}>Details</button></td>
                             </tr>
+
                             
         
          
