@@ -1,4 +1,4 @@
-
+import {useState} from 'react';
 import './App.css';
 import MovieListComponent from './MovieList';
 import martin from './img/martin.png';
@@ -11,8 +11,9 @@ import WonderWoman from './img/wonderwoman.png';
 import Wolverine from './img/Wolverine.png';
 import Spiderman from './img/spiderman.png';
 import Avtar from './img/Avtar.png';
+import MovieFormComponent from './MovieForm.js';
 
-let movies = [
+let moviesData = [
   { id: 1,
     title:'Inception', 
     year: 2010, 
@@ -96,8 +97,29 @@ let movies = [
 
 
 const App = () => {
+  const [movies,setMovies]=useState(moviesData);
+  const [success,setSuccess]=useState(false);
+  const addNewMovie= (movie)=>{
+    setMovies([...movies,movie]);
+    setSuccess(true);
+    setTimeout(()=>{
+      setSuccess(false);
+    },2000);
+  }
   return (
     <div className='container'>
+       {success ? (
+        <div className='row'>
+          <div className='col-6 offset-3'>
+            <div class='alert alert-success text-center' role='alert'>
+              You've successfully added a Movie!
+            </div>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
+    <MovieFormComponent addNewMovie={addNewMovie}/>
     <MovieListComponent movies={movies}/>
     </div>
   );
