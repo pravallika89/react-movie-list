@@ -1,36 +1,40 @@
 import {useState} from 'react';
 
-const MovieFormComponent=({addNewMovie})=>{
+const MovieFormComponent=( { movie , setMovie ,saveMovie })=>{
+  console.log('inside the form component this is movie',movie);
   //Initialize variables and state hooks
-  const [movieTitle,setMovieTitle]=useState('');
-  const [movieImbdLink,setMovieImbdLink]=useState('');
-  const [movieYear,setMovieYear]=useState('');
-  const [movieGenre,setMovieGenre]=useState('');
-  const [movieImgLink,setMovieImgLink]=useState('');
+  // const [movieTitle,setMovieTitle]=useState('');
+  // const [movieImbdLink,setMovieImbdLink]=useState('');
+  // const [movieYear,setMovieYear]=useState('');
+  // const [movieGenre,setMovieGenre]=useState('');
+  // const [movieImgLink,setMovieImgLink]=useState('');
 
   //Initialize functions
 
-  const handleSubmit=(event)=>{
+  const handleSubmit = event => {
     event.preventDefault();
-    let newMovie={
-      title:movieTitle,
-      year:movieYear,
-      genre:movieGenre,
-      imdbLink:movieImbdLink,
-      image:movieImgLink,
-    };
-    console.log(newMovie);
-    addNewMovie(newMovie);
-    clearForm();
+    console.log('submit button', event);
+    saveMovie(movie);
+    // event.preventDefault();
+    // let newMovie={
+    //   title:movieTitle,
+    //   year:movieYear,
+    //   genre:movieGenre,
+    //   imdbLink:movieImbdLink,
+    //   image:movieImgLink,
+    // };
+    // console.log(newMovie);
+    // addNewMovie(newMovie);
+    // clearForm();
   }
 
-  const clearForm = () => {
-    setMovieTitle('');
-    setMovieImbdLink('');
-    setMovieYear('');
-    setMovieGenre('');
-    setMovieImgLink('');
-  };
+  // const clearForm = () => {
+  //   setMovieTitle('');
+  //   setMovieImbdLink('');
+  //   setMovieYear('');
+  //   setMovieGenre('');
+  //   setMovieImgLink('');
+  // };
   return(
     <div className='row mb-5'>
       <div className='col-6 offset-3'>
@@ -44,9 +48,9 @@ const MovieFormComponent=({addNewMovie})=>{
               type="text"
               id='movieTitle'
               className='form-control'
-              value={movieTitle} 
+              value={movie.title} 
               onChange={(event)=>{
-                setMovieTitle(event.target.value);
+                setMovie({...movie, title: event.target.value});
               }}
               />
           </div>
@@ -57,9 +61,9 @@ const MovieFormComponent=({addNewMovie})=>{
               type="text"
               id='movieImbdLink'
               className='form-control'
-              value={movieImbdLink}
+              value={movie.imdbLink}
               onChange={(event)=>{
-                setMovieImbdLink(event.target.value);
+                setMovie({...movie, imdbLink:event.target.value});
               }}
               />
           </div>
@@ -70,9 +74,9 @@ const MovieFormComponent=({addNewMovie})=>{
               type="text"
               id='movieImgLink'
               className='form-control'
-              value={movieImgLink}
+              value={movie.image}
               onChange={(event)=>{
-                setMovieImgLink(event.target.value);
+                setMovie({...movie, image:event.target.value});
               }}
               />
           </div>
@@ -84,9 +88,9 @@ const MovieFormComponent=({addNewMovie})=>{
                 type="text"
                 id='movieYear'
                 className='form-control'
-                value={movieYear} 
+                value={movie.year} 
                 onChange={(event)=>{
-                  setMovieYear(event.target.value);
+                  setMovie({...movie, year:event.target.value});
                 }}
 
                 />
@@ -98,9 +102,9 @@ const MovieFormComponent=({addNewMovie})=>{
                 type="text"
                 id='movieGenre'
                 className='form-control'
-                value={movieGenre} 
+                value={movie.genre} 
                 onChange={(event)=>{
-                  setMovieGenre(event.target.value);
+                  setMovie({...movie, genre:event.target.value});
                 }}
                 />
             </div>

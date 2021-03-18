@@ -99,13 +99,66 @@ let moviesData = [
 const App = () => {
   const [movies,setMovies]=useState(moviesData);
   const [success,setSuccess]=useState(false);
-  const addNewMovie= (movie)=>{
-    setMovies([...movies,movie]);
-    setSuccess(true);
-    setTimeout(()=>{
-      setSuccess(false);
-    },2000);
-  }
+  const [movie, setMovie]=useState({
+    id: '',
+    title:'', 
+    year: '', 
+    genre:'', 
+    imdbLink:'' , 
+    image: '' 
+  });
+  const saveMovie = (movie) => {
+    
+    // check to see if a movie has an id
+    //if it does, then update the movie
+    //if it doesn't then save it as new movie 
+    if (movie.id) {
+      //replace our original movie details with updated details
+      //push back into our array
+      console.log(movie.title);
+      let i =movies.findIndex(m =>m.id === movie.id)
+      let updatedMovies = movies.filter(m => m.id !== movie.id);
+      //updatedMovies.push(movie)
+      updatedMovies.splice(i,0,movie)
+      setMovies([ ...updatedMovies]);
+
+    } else{
+      //create unique id for the new movie
+      movie.id=Date.now();
+      setMovies([...movies,movie])
+    }
+
+    // console.log('get to save the movie inside the app', movie);
+    // movie.id = Date.now();
+    // setMovies([...movies, movie]);
+    // console.log('my movies',movies);
+    setMovie({
+      id: '',
+    title:'', 
+    year: '', 
+    genre:'', 
+    imdbLink:'', 
+    image: '',
+    })
+ };
+ // clear form
+ const removeMovie = (movieId) => {
+   if(window.confirm('Are you sure you to remove this movie?')){
+    let newMovies = movies.filter(m => m.id !== movieId);
+    //console.log ('My new movies', newMovies);
+    setMovies(newMovies);
+
+   }
+   
+
+ }
+  // const addNewMovie= (movie)=>{
+  //   setMovies([...movies,movie]);
+  //   setSuccess(true);
+  //   setTimeout(()=>{
+  //     setSuccess(false);
+  //   },2000);
+  // }
   return (
     <div className='container'>
        {success ? (
@@ -119,8 +172,8 @@ const App = () => {
       ) : (
         ''
       )}
-    <MovieFormComponent addNewMovie={addNewMovie}/>
-    <MovieListComponent movies={movies}/>
+    <MovieFormComponent movie={movie} setMovie={setMovie} saveMovie={saveMovie} />
+    <MovieListComponent movies={movies} removeMovie={removeMovie} setMovie={setMovie}/>
     </div>
   );
 }
